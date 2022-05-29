@@ -1,0 +1,265 @@
+﻿@{
+    ViewData["Title"] = "Admin Panel";
+}
+
+<script>
+  $(document).ready(function () {
+    //$('#resim').addClass('d-none');
+    $("#resim").hide();
+    $("#personel").hide();
+    $("#onayBekleyenL1").hide();
+    $("#onayBekleyenMudur").hide();
+
+    var jsonData = {};
+    $.ajax({
+      type: "GET",
+      url: "api/Personel",
+      dataType: "json",
+      data: JSON.stringify(jsonData),
+      success: function (data) {
+        for (var i = 0; i < data.length; i++) {
+          $("#selectionPersonel").append('<option value="' + data[i]["id"] + '">' + data[i]["firstName"] + " " + data[i]["lastName"] + "</option>");
+        }
+
+        $("#selectionPersonel").change(function () {
+          var selectedIndex = $("#selectionPersonel").val();
+
+          $("#firstname").val(data[selectedIndex - 1]["firstName"]);
+          $("#lastname").val(data[selectedIndex - 1]["lastName"]);
+          $("#email").val(data[selectedIndex - 1]["email"]);		  
+          $("#Status").val(data[selectedIndex - 1]["activeStatus"]);
+        });
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        console.log("Hataa");
+      }, // For Süslü
+    }); //Ajax Süslü
+  }); // Document Süslü
+
+  function personelGoster() {
+    $("#personel").show();
+    $("#onayBekleyenL1").hide();
+    $("#onayBekleyenMudur").hide();
+    $("#resim").addClass("d-none");
+  }
+
+  function onayBekleyen() {
+    $("#onayBekleyenL1").show();
+    $("#personel").hide();
+    $("#onayBekleyenMudur").show();
+    $("#resim").addClass("d-none");
+  }
+  function onayBekleyenMudur() {
+    $("#onayBekleyenMudur").show();
+    $("#onayBekleyenL1").hide();
+    $("#personel").hide();
+    $("#resim").addClass("d-none");
+  }
+</script>
+
+
+<style>
+	textarea {
+		resize: none;
+		font-size: 12px !important;
+		height: 80px !important;
+	}
+
+	.btn-purple2 {
+		color: white;
+		background-color: #8540f5;
+	}
+
+		.btn-purple2:hover {
+			color: white;
+			background-color: #8540f5;
+		}
+
+	.table-purple {
+		color: white;
+		background-color: #6a67ce;
+	}
+</style>
+
+
+<div class="d-flex justify-content-end">
+	<!-- evenly around-->
+	<button type="button" id="btn1" onclick="personelGoster()" class="btn btn-purple2 me-2 bi bi-file-earmark-person "> Personel Yönetimi</button> <!-- ms me marginStart - me marginEnd-->
+	<button type="button" id="btn4" onclick="onayBekleyen()" class="btn btn-warning bi bi-info-square-fill"> <b>Onay Bekleyenler</b></button>
+</div>
+
+<div id="resim" class="d-flex justify-content-center mt-5">
+	<img src="~/img/noneContend.svg" class="img-fluid" />
+</div>
+
+<div class="mt-3">
+	<div id="personel">
+		<table class="table table-bordered text-center table-sm align-middle bg-white small">
+			<thead class="bg-light table-dark w-auto small">
+				<tr>
+					<th class="w-25">Bilgiler</th>
+					<th class="w-75">Personel İçin Doldurulması Gereken Alanlar</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>Personel Seçiniz</td>
+				<td>
+					<select id="selectionPersonel" class="form-select form-select-sm">
+						<option selected>Personel Seçiniz..</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>İsim</td>
+				<td><input type="text" id="firstname" value="" class="form-control" placeholder="İsim" /></td>
+			</tr>
+			<tr>
+				<td>Soyisim</td>
+				<td><input type="text" id="lastname" value="" class="form-control" placeholder="Soyisim"></td>
+			</tr>
+			<tr>
+				<td>E-Posta Adresi</td>
+				<td><input type="text" id="email" value="" class="form-control" placeholder="E-Posta Adresi"></td>
+			</tr>
+			<tr>
+				<td>Departman</td>
+				<td>
+					<select id="departant" class="form-select form-select-sm" aria-label=".form-select-sm example">
+						<option selected>Departman Seçiniz..</option>
+						<option value="1">L1 - Yazılım Destek</option>
+						<option value="2">L2 - Yazılım</option>
+						<option value="3">L3 - Yazılım</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Aktiflik Durumu</td>
+				<td>
+					<select id="Status" class="form-select form-select-sm" aria-label=".form-select-sm example">
+							<option selected>Durum</option>
+							<option value="-1">Pasif</option>
+							<option value="1">Aktif</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>İşlemler</td>
+				<td>
+					<button type="button" class="btn btn-success w-25 float-end">Ekle</button>
+					<button type="button" class="btn btn-secondary w-25 float-end mx-1">Kaydet</button>
+					<button type="button" class="btn btn-danger w-25 float-end">Sil</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="onayBekleyenL1" class="table-responsive">
+		<table class="table table-bordered text-center table-sm align-middle small bg-white">
+			<thead class="table-purple w-auto small">
+				<tr>
+					<th>İsim Soyisim</th>
+					<th>Departmanı</th>
+					<th>Talep Edilen İzin Tarihi</th>
+					<th>İzin Tipi	</th>
+					<th>İzne Çıkış Tarihi	</th>
+					<th>İzinden Dönüş Tarihi	</th>
+					<th>Durum</th>
+					<th>Açıklama</th>
+					<th>Onaylayan</th>
+					<th>Doküman</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody class="w-auto small">
+				<tr>
+					<td>
+						<p class="fw-bold mb-1">Nazım</p>
+						<p class="text-muted mb-0">nazim.ozturk@mail.com</p>
+					</td>
+					<td>
+						<p class="fw-normal mb-1">Yazılım</p>
+						<p class="text-muted mb-0">L1</p>
+					</td>
+					<td>
+						<span class="">28-05-2022</span>
+					</td>
+					<td>Yıllık İzin</td>
+					<td>09-09-2022</td>
+					<td>19-09-2022</td>
+
+					<td>
+						<select class="form-select">
+							<option selected>Onay Bekleniyor</option>
+							<option value="1">Onaylandı</option>
+							<option value="2">Reddedildi</option>
+						</select>
+					</td>
+
+					<td>
+						<div class="form-floating">
+							<textarea class="form-control" placeholder="Açıklama" id="floatingTextarea2"></textarea>
+						</div>
+					</td>
+					<td>Kadir KESİCİ</td>
+					<td>Doküman</td>
+					<td><button type="button" class="btn btn-purple2">Kaydet</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div id="onayBekleyenMudur" class="table-responsive">
+		<table class="table table-bordered text-center table-sm align-middle small bg-white">
+			<thead class="table-purple w-auto small">
+				<tr>
+					<th>İsim Soyisim</th>
+					<th>Departmanı</th>
+					<th>Talep Edilen İzin Tarihi</th>
+					<th>İzin Tipi	</th>
+					<th>İzne Çıkış Tarihi	</th>
+					<th>İzinden Dönüş Tarihi	</th>
+					<th>Durum</th>
+					<th>Açıklama</th>
+					<th>Onaylayan</th>
+					<th>Doküman</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody class="w-auto small">
+				<tr>
+					<td>
+						<p class="fw-bold mb-1">Nazım</p>
+						<p class="text-muted mb-0">nazim.ozturk@mail.com</p>
+					</td>
+					<td>
+						<p class="fw-normal mb-1">Yazılım</p>
+						<p class="text-muted mb-0">L1</p>
+					</td>
+					<td>
+						<span class="">28-05-2022</span>
+					</td>
+					<td>Yıllık İzin</td>
+					<td>09-09-2022</td>
+					<td>19-09-2022</td>
+
+					<td>
+						<select class="form-select">
+							<option selected>Onay Bekleniyor</option>
+							<option value="1">Onaylandı</option>
+							<option value="2">Reddedildi</option>
+						</select>
+					</td>
+
+					<td>
+						<div class="form-floating">
+							<textarea class="form-control" placeholder="Açıklama" id="floatingTextarea2"></textarea>
+						</div>
+					</td>
+					<td>Ünsal GÜNAL</td>
+					<td>Doküman</td>
+					<td><button type="button" class="btn btn-purple2">Kaydet</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>	

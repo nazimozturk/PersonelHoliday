@@ -1,0 +1,228 @@
+﻿@{
+	ViewData["Title"] = "Anasayfa";
+}
+
+<script>
+	$(document).ready(function(){
+
+	$('#izinTalep').click(function(){
+
+	$("#staticBackdrop").modal("show");
+	});
+
+	});
+</script>
+
+<style>
+	div.modal div.modal-body button {
+		cursor: default !important
+	}
+
+	textarea {
+		resize: none;
+		font-size: 12px !important;
+		height: 100px !important;
+	}
+
+	.btn-purple {
+		color: #8540f5;
+		border: 1px solid #8540f5;
+	}
+
+		.btn-purple:hover {
+			color: #8540f5;
+			border: 1px solid #8540f5;
+		}
+
+	.btn-purple2 {
+		color: white;
+		background-color: #8540f5;
+	}
+
+		.btn-purple2:hover {
+			color: white;
+			background-color: #8540f5;
+		}
+
+	.table-purple {
+		color: white;
+		background-color: #6A67CE;
+	}
+
+</style>
+
+<div class="container mw-100 ">
+	<div class="row text-start">
+		<div class="col-6">
+			<h2>Hoş Geldin Nazım</h2>
+		</div>
+		<div class="col-6 text-end">
+			<h3>Tarih: @DateTime.Now.ToShortDateString()</h3>
+		</div>
+	</div>
+	<div class=" mt-3" style="width:30%">
+		<table class="table table-bordered border-dark table-sm w-100">
+			<thead class="table-borderless">
+				<tr>
+					<th class="w-50">İzin Talep Et</th>
+					<td><button type="button" id="izinTalep" class="btn btn-purple2 btn-sm w-100">İzin Talep</button></td>
+				</tr>
+				<tr>
+					<th>Hak Edilen İzin</th>
+					<td class="text-center">25 Gün</td>
+				</tr>
+				<tr>
+					<th>Kalan İzinlerim</th>
+					<td class="text-center">15 Gün</td>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="mt-5 text-center">
+		<h5>İzin taleplerim</h5>
+		<table class="table table-bordered text-center table-sm align-middle mb-0 bg-white ">
+			<thead class="table-purple w-auto small">
+				<tr>
+					<th>İsim Soyisim</th>
+					<th>Departmanı</th>
+					<th>Talep Edilen Tarih</th>
+					<th>İzin Tipi	</th>
+					<th>İzne Çıkış Tarihi	</th>
+					<th>İzinden Dönüş Tarihi	</th>
+					<th>Durum</th>
+					<th>Açıklama</th>
+					<th>Onaylayan</th>
+				</tr>
+			</thead>
+			<tbody class="w-auto small">
+				<tr>
+					<td>
+						<p class="fw-bold mb-1">Nazım</p>
+						<p class="text-muted mb-0">nazim@mail.com</p>
+					</td>
+					<td>
+						<p class="fw-normal mb-1">Yazılım</p>
+						<p class="text-muted mb-0">L1</p>
+					</td>
+					<td>
+						<span class="">28-05-2022</span>
+					</td>
+					<td>Yıllık İzin</td>
+					<td>09-09-2022</td>
+					<td>19-09-2022</td>
+					<td>Onaylandı</td>
+					<td>OK</td>
+					<td>Nazım</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="fw-bold mb-1">Nihal</p>
+						<p class="text-muted mb-0">nihal@mail.com</p>
+					</td>
+					<td>
+						<p class="fw-normal mb-1">Yazılım</p>
+						<p class="text-muted mb-0">L1</p>
+					</td>
+					<td>
+						<span class="">28-05-2022</span>
+					</td>
+					<td>Yıllık İzin</td>
+					<td>09-09-2022</td>
+					<td>19-09-2022</td>
+					<td>Onaylandı</td>
+					<td>OK</td>
+					<td>Nazım</td>
+				</tr>
+				<tr>
+					<td>
+						<p class="fw-bold mb-1">Mahir</p>
+						<p class="text-muted mb-0">Mahir@mail.com</p>
+					</td>
+					<td>
+						<p class="fw-normal mb-1">Yazılım</p>
+						<p class="text-muted mb-0">L1</p>
+					</td>
+					<td>
+						<span class="">28-05-2022</span>
+					</td>
+					<td>Yıllık İzin</td>
+					<td>09-09-2022</td>
+					<td>19-09-2022</td>
+					<td>Onaylandı</td>
+					<td>OK</td>
+					<td>Nazım</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">İzin Formu</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<table class="table table-bordered text-center table-sm align-middle mb-0 bg-white small">
+					<thead class="table-purple w-auto small">
+						<tr>
+							<th>Bilgiler</th>
+							<th>Doldurulması Gereken Alanlar</th>
+						</tr>
+					</thead>
+					<tr>
+						<td>İsim Soyisim</td>
+						@*<td><button class="ui purple basic button w-100">Nazım ÖZTÜRK</button></td>*@
+						<td><button type="button" class="btn btn-purple btn-sm w-100">Nazım ÖZTÜRK</button></td>
+					</tr>
+					<tr>
+						<td>Departmanı</td>
+						<td><button type="button" class="btn btn-purple btn-sm w-100">Yazılım</button></td>
+					</tr>
+					@*<tr>
+						<td>Talep Edilen İzin Tarihi</td>
+						<td><button type="button" class="btn btn-purple btn-sm w-100">@DateTime.Now.ToShortDateString()</button></td>
+						</tr>*@
+					<tr>
+						<td>İzin Tipi*</td>
+						<td>
+							<select class="form-select form-select-sm" aria-label=".form-select-sm example">
+								<option selected>İzin Tipini Seçiniz</option>
+								<option value="1">Yıllık İzni</option>
+								<option value="2">Mazeret İzni</option>
+								<option value="3">Evlilik İzni</option>
+								<option value="4">Taşınma İzni</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>İzne Çıkış Tarihi*</td>
+						<td><input type="date" id="createTaskDate" class="form-control" aria-describedby="basic-addon2"><i class="mdi mdi-calendar-range font-13"></i></td>
+					</tr>
+					<tr>
+						<td>İzinden Dönüş Tarihi*</td>
+						<td><input type="date" id="createTaskDate" class="form-control mdi mdi-calendar-range font-13" aria-describedby="basic-addon2"></td>
+					</tr>
+					<tr>
+						<td>Açıklama</td>
+						<td><textarea class="form-control" placeholder="İzin Sebebi" id="floatingTextarea2"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>İzin Talep Dosyası*</td>
+						<td>
+							<input class="form-control form-control-sm" id="formFileSm" type="file">
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+				<button type="button" class="btn btn-success">Kaydet</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "İzinler";
+}
+
+<script>
+$(document).ready(function () {
+	$("#table").bootstrapTable({
+		url: "api/Personel",
+		pagination: true,
+		search: true,
+		columns: [
+			{
+				field: "id",
+				title: "Personel ID",
+			},
+			{
+				field: "firstName",
+				title: "Personel Adı",
+			},
+			{
+				field: "lastName",
+				title: "Personel Soyadı",
+			},
+			{
+				field: "email",
+				title: "E-Posta",
+			},
+			{
+				field: "allowedPermitCount",
+				title: "Kullanılan İzin",
+			},
+			{
+				field: "activeStatus",
+				title: "Durum",
+			},
+			{
+				field: "totalPermitCount",
+				title: "Toplam İzin",
+			},
+		]
+	});
+})
+</script>
+
+<div class="my-5">
+	<table class="table table-bordered text-center table-sm align-middle bg-white"
+		   id="table"
+		   data-toggle="table"
+		   data-toolbar="#toolbar"
+		   data-search="true"
+		   data-show-export="true"
+	>
+		<thead class="bg-light table-dark w-auto small">
+		</thead>
+	</table>
+</div>
+
+<link href="https://unpkg.com/bootstrap-table@1.20.1/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.20.1/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.20.1/dist/extensions/export/bootstrap-table-export.min.js"></script>

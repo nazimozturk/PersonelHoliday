@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Kampüs365</title>
+	<link rel="stylesheet" href="~/css/site.css" />
+
+	<!-- CSS only Bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	<!-- JavaScript Bundle with Popper  Bootstrap-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+</head>
+<style>
+	nav {
+		background-color: #f5f5f5;
+		background-image: url('/img/navBarBg.png');
+		background-attachment: fixed;
+		background-repeat: repeat-x;
+		color: #FFF !important;
+	}
+
+	body {
+		background-color: #EBE7FF;
+	}
+
+	.footer {
+		background-color: #f5f5f5;
+		background-image: url('/img/footerBg.png');
+		background-repeat: repeat-x;
+		color: #FFF !important;
+		height:61px;
+	}
+</style>
+<body>
+	<header>
+		<nav id="navbar" class="navbar  navbar-dark text-light navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
+			<div class="container">
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Personel Holiday</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+					<ul class="navbar-nav flex-grow-1">
+						<li class="nav-item">
+							<a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Admin">Admin Paneli</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Permit">İzin Listesi</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="TestPage">Test Sayfası</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Login">Login Sayfası</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+
+	<footer id="footer" class="footer text-muted fixed-bottom">
+		<div class="container text-light">
+			<b> &copy; @DateTime.Now.Year - Personel İzin Takip Formu</b>
+		</div>
+	</footer>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
