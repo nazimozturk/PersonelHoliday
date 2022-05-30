@@ -10,40 +10,49 @@ namespace PersonelHoliday.Controllers.APIController
     [ApiController]
     public class APIController : ControllerBase
     {
-        private readonly  PersonelRepository _personelReposiroty;
+        private readonly  PersonelRepository _personelRepository;
 
-         public APIController(PersonelRepository personelRepository)
+        public APIController(PersonelRepository personelRepository)
         {
-            _personelReposiroty = personelRepository;
+            _personelRepository = personelRepository;
         }
+
         
         [HttpGet("Personel")]
         public ActionResult Get()
         {
-            List<PersonelModel> returnModel = _personelReposiroty.GetPersonelList();
+            List<PersonelModel> returnModel = _personelRepository.GetPersonelList();
             
             return Ok(returnModel);
         }
 
-        // POST api/<APIController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpGet("Departman")]
+        public ActionResult DepartmanList()
         {
+            List<DepartmanModel> returnModel = _personelRepository.GetDepartmanList();
+
+            return Ok(returnModel);
+        }
+
+        // POST api/<APIController>
+        [HttpPost("PersonelInsert")]
+        public bool Post(string FirstName, string LastName, string Email, string Password)
+        {
+            return _personelRepository.Insert(FirstName, LastName, Password, Email);
         }
 
         // PUT api/<APIController>/5
         [HttpPut("Update")]
-        public void Put(int id, [FromBody] string value)
+        public bool Put(int id, string FirstName, string LastName, string Email)
         {
+            return _personelRepository.Update(id,FirstName,LastName,Email);
         }
 
-        //// DELETE api/<APIController>/5
-        //[HttpDelete("DeletePersonel/{id}")]
-        //public ActionResult Delete(int id)
-        //{
-        //    List<PersonelModel> returnModel = _personelReposiroty.Delete(id);
-
-        //    return Ok(returnModel);
-        //}
+        // DELETE api/<APIController>/5
+        [HttpDelete("DeletePersonel")]
+        public bool Delete(int id)
+        {
+          return _personelRepository.Delete(id);
+        }
     }
 }

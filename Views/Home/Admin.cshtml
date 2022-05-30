@@ -66,14 +66,16 @@
 				<td>E-Posta Adresi</td>
 				<td><input type="text" id="email" value="" class="form-control" placeholder="E-Posta Adresi"></td>
 			</tr>
+			
+			<tr>
+				<td>Şifre</td>
+				<td><input type="password" id="password" value="" class="form-control" placeholder="Şifre"></td>
+			</tr>
 			<tr>
 				<td>Departman</td>
 				<td>
 					<select id="departant" class="form-select form-select-sm" aria-label=".form-select-sm example">
-						<option selected>Departman Seçiniz..</option>
-						<option value="1">L1 - Yazılım Destek</option>
-						<option value="2">L2 - Yazılım</option>
-						<option value="3">L3 - Yazılım</option>
+						<option selected hidden>Departman Seçiniz..</option>
 					</select>
 				</td>
 			</tr>
@@ -81,7 +83,7 @@
 				<td>Aktiflik Durumu</td>
 				<td>
 					<select id="Status" class="form-select form-select-sm" aria-label=".form-select-sm example">
-							<option selected>Durum</option>
+							<option selected hidden >Durum</option>
 							<option value="-1">Pasif</option>
 							<option value="1">Aktif</option>
 					</select>
@@ -90,9 +92,9 @@
 			<tr>
 				<td>İşlemler</td>
 				<td>
-					<button type="button" class="btn btn-success w-25 float-end">Ekle</button>
-					<button type="button" class="btn btn-secondary w-25 float-end mx-1">Kaydet</button>
-					<button type="button" class="btn btn-danger w-25 float-end">Sil</button>
+					<button id="PersonelAdd" type="button" class="btn btn-success w-25 float-end">Ekle</button>
+					<button id="PersonelUpdate" type="button" class="btn btn-secondary w-25 float-end mx-1">Kaydet</button>
+					<button id="PersonelDelete" type="button" class="btn btn-danger w-25 float-end">Sil</button>
 				</td>
 			</tr>
 		</table>
@@ -134,9 +136,10 @@
 
 					<td>
 						<select class="form-select">
-							<option selected>Onay Bekleniyor</option>
+							<option selected >Onay Bekleniyor</option>
 							<option value="1">Onaylandı</option>
 							<option value="2">Reddedildi</option>
+							<option value="3">İptal Edildi</option>
 						</select>
 					</td>
 
@@ -192,6 +195,7 @@
 							<option selected>Onay Bekleniyor</option>
 							<option value="1">Onaylandı</option>
 							<option value="2">Reddedildi</option>
+							<option value="3">İptal Edildi</option>
 						</select>
 					</td>
 
